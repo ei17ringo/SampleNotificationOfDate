@@ -50,7 +50,7 @@
     
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comp = [[NSDateComponents alloc] init];
-    [comp setDay:1];
+    [comp setDay:0];
     
     // 本日から1日分動かした日付（明日）を取得する。
     NSDate *future = self.settingDatePicker.date;
@@ -106,23 +106,29 @@
 
     
     //-------- localNotificationの設定 --------
-    localNotification.fireDate = date_converted;
+    int minutes = 50;
+    for (int i=0; i < 10; i++) {
+        hourDateString = [NSString stringWithFormat:@"%@ 02:%2d:00", [df stringFromDate:date_converted],minutes+i];
+        countdownDayNumber = countdownDayNumber - 1;
+        
+        date_converted = [formatter dateFromString:hourDateString];
+        
+        localNotification.fireDate = date_converted;
+        
+        localNotification.alertBody = [NSString stringWithFormat:@"あと%d日です",countdownDayNumber];
+        
+        
+        //localNotification.repeatInterval = NSDayCalendarUnit;
+        //localNotification.repeatInterval = NSMinuteCalendarUnit;
+        
+        localNotification.applicationIconBadgeNumber = countdownDayNumber;
+        
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    }
     
-    localNotification.alertBody = [NSString stringWithFormat:@"あと%d日です",countdownDayNumber];
-    
-
-    localNotification.repeatInterval = NSDayCalendarUnit;
-    //localNotification.repeatInterval = NSMinuteCalendarUnit;
-    
-    localNotification.applicationIconBadgeNumber = countdownDayNumber;
-    
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     //-------- localNotification End --------
-    
-    
-    
     
 }
 

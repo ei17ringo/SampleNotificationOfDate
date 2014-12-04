@@ -35,26 +35,26 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    
-    NSDate *now = [NSDate date];
-    
-    // 通知領域から消す
-    //[[UIApplication sharedApplication] cancelLocalNotification:notification];
-    
-    notification.fireDate = now;
-    
-    notification.alertBody = [NSString stringWithFormat:@"あと%d日です",2];
-    
-    
-    //localNotification.repeatInterval = NSDayCalendarUnit;
-    notification.repeatInterval = NSMinuteCalendarUnit;
-    
-    notification.applicationIconBadgeNumber = 2;
-    
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+//    UILocalNotification *notification = [[UILocalNotification alloc] init];
+//    
+//    NSDate *now = [NSDate date];
+//    
+//    // 通知領域から消す
+//    //[[UIApplication sharedApplication] cancelLocalNotification:notification];
+//    
+//    notification.fireDate = now;
+//    
+//    notification.alertBody = [NSString stringWithFormat:@"あと%d日です",2];
+//    
+//    
+//    //localNotification.repeatInterval = NSDayCalendarUnit;
+//    notification.repeatInterval = NSMinuteCalendarUnit;
+//    
+//    notification.applicationIconBadgeNumber = 2;
+//    
+//    notification.timeZone = [NSTimeZone defaultTimeZone];
+//    
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
 
 }

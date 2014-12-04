@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
+- (IBAction)tapStart:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *settingDatePicker;
+@property (weak, nonatomic) IBOutlet UILabel *settingDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 
 @end
 

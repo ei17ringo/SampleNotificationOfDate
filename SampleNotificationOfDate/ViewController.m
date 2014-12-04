@@ -42,6 +42,9 @@
 
 - (IBAction)tapStart:(id)sender {
     
+    // アプリに登録されている全ての通知を削除
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
     //現在日付
     NSDate *now = [NSDate date];
     
@@ -78,28 +81,18 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     
     // 変換用の書式を設定
-    [formatter setDateFormat:@"YYYY/MM/dd 00:00:00"];
+    [formatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
+    
     
     // NSString を NSDate に変換
-    NSDate* date_converted;
-    date_converted = [formatter dateFromString:[df stringFromDate:[cal dateByAddingComponents:comp toDate:now options:0]]];
+    NSDate* date_converted = [cal dateByAddingComponents:comp toDate:now options:0];
+    
+    //時間単位の文字列にセット
+    NSString *hourDateString = [NSString stringWithFormat:@"%@ 00:00:00", [df stringFromDate:date_converted]];
+    
+    
+    date_converted = [formatter dateFromString:hourDateString];
 
-    //-------- localNotificationの設定 --------
-    localNotification.fireDate = date_converted;
-    
-    localNotification.alertBody = [NSString stringWithFormat:@"あと%d日です",countdownDayNumber];
-    
-
-    localNotification.repeatInterval = NSDayCalendarUnit;
-    
-    localNotification.applicationIconBadgeNumber = countdownDayNumber;
-    
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    //-------- localNotification End --------
-    
-    
     //設定した日数と、カウントダウンする日付をUserDefaultに設定
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -112,5 +105,26 @@
     [defaults synchronize];
 
     
+    //-------- localNotificationの設定 --------
+    localNotification.fireDate = date_converted;
+    
+    localNotification.alertBody = [NSString stringWithFormat:@"あと%d日です",countdownDayNumber];
+    
+
+    localNotification.repeatInterval = NSDayCalendarUnit;
+    //localNotification.repeatInterval = NSMinuteCalendarUnit;
+    
+    localNotification.applicationIconBadgeNumber = countdownDayNumber;
+    
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    //-------- localNotification End --------
+    
+    
+    
+    
 }
+
+
 @end

@@ -168,6 +168,11 @@
 				TargetAttributes = {
 					1B6EE5271A2F025600AF9C12 = {
 						CreatedOnToolsVersion = 6.0.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1B6EE5401A2F025600AF9C12 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -414,6 +419,7 @@
 				1B6EE54D1A2F025600AF9C12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1B6EE54E1A2F025600AF9C12 /* Build configuration list for PBXNativeTarget "SampleNotificationOfDateTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +428,7 @@
 				1B6EE5501A2F025600AF9C12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

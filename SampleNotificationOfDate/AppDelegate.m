@@ -16,7 +16,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    // UIApplicationLaunchOptionsLocalNotificationKeyをキーにして、情報を取り出す
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    // nilでなければ、通知の情報が格納されている
+    if(notification != nil) {
+        
+        
+    }
     return YES;
 }
 
@@ -26,12 +34,33 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    
+    NSDate *now = [NSDate date];
+    
+    // 通知領域から消す
+    //[[UIApplication sharedApplication] cancelLocalNotification:notification];
+    
+    notification.fireDate = now;
+    
+    notification.alertBody = [NSString stringWithFormat:@"あと%d日です",2];
+    
+    
+    //localNotification.repeatInterval = NSDayCalendarUnit;
+    notification.repeatInterval = NSMinuteCalendarUnit;
+    
+    notification.applicationIconBadgeNumber = 2;
+    
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -40,6 +69,30 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandler{
+
+//NSDate *now = [NSDate date];
+//
+//// 通知領域から消す
+//[[UIApplication sharedApplication] cancelLocalNotification:notification];
+//
+//notification.fireDate = now;
+//
+//notification.alertBody = [NSString stringWithFormat:@"あと%d日です",2];
+//
+//
+////localNotification.repeatInterval = NSDayCalendarUnit;
+//notification.repeatInterval = NSMinuteCalendarUnit;
+//
+//notification.applicationIconBadgeNumber = 2;
+//
+//notification.timeZone = [NSTimeZone defaultTimeZone];
+//
+//[[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
+
 }
 
 @end

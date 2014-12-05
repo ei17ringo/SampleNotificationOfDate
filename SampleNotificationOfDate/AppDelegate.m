@@ -17,14 +17,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // UIApplicationLaunchOptionsLocalNotificationKeyをキーにして、情報を取り出す
-    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    float osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
     
-    // nilでなければ、通知の情報が格納されている
-    if(notification != nil) {
+    if (osVersion >= 8.0f) {
+        UIUserNotificationType types =  UIUserNotificationTypeBadge|
+        UIUserNotificationTypeSound|
+        UIUserNotificationTypeAlert;
         
+        UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
         
+        [application registerUserNotificationSettings:mySettings];
+        
+
     }
+ 
     return YES;
 }
 

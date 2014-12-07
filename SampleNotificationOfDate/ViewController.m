@@ -108,7 +108,12 @@
     //-------- localNotificationの設定 --------
     int minutes = 50;
     for (int i=0; i < 10; i++) {
-        hourDateString = [NSString stringWithFormat:@"%@ 13:%2d:00", [df stringFromDate:date_converted],minutes+i];
+        [comp setDay:i];
+        
+        date_converted = [cal dateByAddingComponents:comp toDate:now options:0];
+        
+        hourDateString = [NSString stringWithFormat:@"%@ 00:00:00", [df stringFromDate:date_converted]];
+
         countdownDayNumber = countdownDayNumber - 1;
         
         date_converted = [formatter dateFromString:hourDateString];
